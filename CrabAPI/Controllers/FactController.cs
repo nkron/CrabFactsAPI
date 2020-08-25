@@ -28,7 +28,7 @@ namespace CrabAPI.Controllers
         public Fact RandomFact()
         {
             try { 
-                int index = _rand.Next(_facts.Count);
+                var index = _rand.Next(_facts.Count);
                 return _facts[index];
             }
             catch(ArgumentOutOfRangeException e)

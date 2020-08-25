@@ -11,6 +11,30 @@ namespace CrabAPI.Tests.Controllers
     public class FactControllerTest
     {
         [TestMethod]
+        public void ConstructorTest()
+        {
+            var repo = new Mock<ISqliteDataAccess>();
+
+            var controller = new FactController(repo.Object);
+
+            Assert.IsNotNull((controller));
+        }
+
+        [TestMethod]
+        public void Get_ReturnsCorrectFact()
+        {
+            var repo = new Mock<ISqliteDataAccess>();
+            repo.Setup(p => p.LoadFacts()).Returns(GetFakeData());
+            var controller = new FactController(repo.Object);
+            var expectedId = 1; 
+            var actualId = 0;
+
+            actualId = controller.Get(1).id;
+
+            Assert.AreEqual(expectedId,actualId);
+        }
+
+        [TestMethod]
         public void RandomFact_GivesFact()
         {
             // Arrange
